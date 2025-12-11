@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Edit<%= food.name %></title>
+        <title>Editing<%= food.name %></title>
     </head>
     <body>
         <%- include('../partials/_navbar.ejs') %>
@@ -26,30 +26,30 @@
 
             <label for="status">Status:</label>
             <select id="status" name="status">
-            <option
-                value="inStock"
-                <%= food.status === "inStock" ? "selected" : "" %>
-            >
-                In Stock
-            </option>
-            <option
-                value="runningLow"
-                <%= food.status === "runningLow" ? "selected" : "" %>
-            >
-                Running Low
-            </option>
-            <option
-                value="outStock"
-                <%= food.status === "outStock" ? "selected" : "" %>
-            >
-                Out of Stock
-            </option>
-            <option
-                value="expired"
-                <%= food.status === "expired" ? "selected" : "" %>
-            >
-                Expired
-            </option>
+                <option
+                    value="inStock"
+                    <%= food.status === "inStock" ? "selected" : "" %>
+                >
+                    In Stock
+                </option>
+                <option
+                    value="runningLow"
+                    <%= food.status === "runningLow" ? "selected" : "" %>
+                >
+                    Running Low
+                </option>
+                <option
+                    value="outStock"
+                    <%= food.status === "outStock" ? "selected" : "" %>
+                >
+                    Out of Stock
+                </option>
+                <option
+                    value="expired"
+                    <%= food.status === "expired" ? "selected" : "" %>
+                >
+                    Expired
+                </option>
             </select>
             <button type="submit">Update Item</button>
         </form>

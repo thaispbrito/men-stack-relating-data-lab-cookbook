@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
         // Look up the user from req.session
         const currentUser = await User.findById(req.session.user._id);
         // Render index.ejs, passing in all of the current user's
-        // foods as data in the context object.
+        // food items as data in the context object.
         res.render('foods/index.ejs', {
             foods: currentUser.pantry,
         });
@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
         // Look up the user from req.session
         const currentUser = await User.findById(req.session.user._id);
         // Push req.body (the new form data object) to the
-        // foods array of the current user
+        // pantry array of the current user
         currentUser.pantry.push(req.body);
         // Save changes to the user
         await currentUser.save();
@@ -46,7 +46,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-// SHOW - GET /users/:userId/foods/:itemId
+// SHOW - GET /users/:userId/foods/:foodId
 router.get('/:foodId', async (req, res) => {
     try {
         // Look up the user from req.session
@@ -64,7 +64,7 @@ router.get('/:foodId', async (req, res) => {
     }
 });
 
-// EDIT - GET /users/:userId/foods/:itemId/edit
+// EDIT - GET /users/:userId/foods/:foodId/edit
 router.get('/:foodId/edit', async (req, res) => {
     try {
         const currentUser = await User.findById(req.session.user._id);
@@ -78,7 +78,7 @@ router.get('/:foodId/edit', async (req, res) => {
     }
 });
 
-// UPDATE - PUT /users/:userId/foods/:itemId
+// UPDATE - PUT /users/:userId/foods/:foodId
 router.put('/:foodId', async (req, res) => {
     try {
         // Find the user from req.session
@@ -86,12 +86,12 @@ router.put('/:foodId', async (req, res) => {
         // Find the current food from the id supplied by req.params
         const food = currentUser.pantry.id(req.params.foodId);
         // Use the Mongoose .set() method
-        // this method updates the current application to reflect the new form
+        // this method updates the current food item to reflect the new form
         // data on `req.body`
         food.set(req.body);
         // Save the current user
         await currentUser.save();
-        // Redirect back to the show view of the current food
+        // Redirect back to the show view of the current food item
         res.redirect(
             `/users/${currentUser._id}/foods/${req.params.foodId}`
         );
@@ -101,13 +101,13 @@ router.put('/:foodId', async (req, res) => {
     }
 });
 
-// DELETE - DELETE /users/:userId/foods/:itemId
+// DELETE - DELETE /users/:userId/foods/:foodId
 router.delete('/:foodId', async (req, res) => {
     try {
         // Look up the user from req.session
         const currentUser = await User.findById(req.session.user._id)
         // Use the Mongoose .deleteOne() method to delete
-        // a food using the id supplied from req.params
+        // a food item using the id supplied from req.params
         currentUser.pantry.id(req.params.foodId).deleteOne()
         // Save changes to the user
         await currentUser.save()

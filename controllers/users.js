@@ -22,4 +22,20 @@ router.get('/', async (req, res) => {
     }
 });
 
+// SHOW - GET /users/:userId
+router.get('/:userId', async (req, res) => {
+    try {
+        const otherUser = await User.findById(req.params.userId);
+        if (!otherUser) {
+            return res.redirect('/users'); // user not found
+        }
+        res.render('users/show.ejs', {
+            otherUser: otherUser
+        });
+    } catch (error) {
+        console.log(error);
+        res.redirect('/users');
+    }
+});
+
 module.exports = router;

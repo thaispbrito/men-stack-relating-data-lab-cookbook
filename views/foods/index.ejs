@@ -9,7 +9,6 @@
         <%- include('../partials/_navbar.ejs') %>
         <h1>Welcome to my Pantry!</h1>
         <a href="/users/<%=user._id%>/foods/new">Add New Item</a>
-
         <% if (foods.length > 0) { %>
             <ul>
                 <% foods.forEach((food)=>{ %>
@@ -17,6 +16,21 @@
                     <a href="/users/<%= user._id %>/foods/<%= food._id %>">
                         <%= food.name %>
                     </a>
+                    <br>
+                    <!-- Add edit link to the index template -->
+                    <a href="/users/<%= user._id %>/foods/<%= food._id %>/edit">
+                        Edit
+                    </a>
+                    
+                    <!-- Add delete button to the index template -->
+                    <form 
+                        action="/users/<%= user._id %>/foods/<%= food._id %>?_method=DELETE" 
+                        method="POST" 
+                        style="display:inline;"
+                    >
+                        <button type="submit">Delete</button>
+                    </form>
+                    <br><br>
                 </li>
                 <% }) %>
             </ul>

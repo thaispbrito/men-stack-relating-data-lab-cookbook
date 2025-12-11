@@ -3,25 +3,27 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>
-            <%= food.name %>
-        </title>
+        <title><%= food.name %></title>
     </head>
     <body>
         <%- include('../partials/_navbar.ejs') %>
-        <h1>My pantry has <%= food.name%>!</h1>
+        <h1><%= food.name%></h1>
+        <% 
+            // For looking up the status labels
+            const statusLabels = {
+                inStock: "In Stock",
+                runningLow: "Running Low",
+                outStock: "Out of Stock",
+                expired: "Expired"
+            };
+        %>
         <% if (food.notes) { %>
             <p>Notes: <%= food.notes %></p>
         <% } %>
-        <p>Current Status: <%= food.status %></p>
-        <a href="/users/<%= user._id %>/foods/<%= food._id %>/edit">
-            Edit this item
-        </a>
-        <form
-            action="/users/<%= user._id %>/foods/<%= food._id %>?_method=DELETE"
-            method="POST"
-        >
-            <button type="submit">Delete this item</button>
-        </form>
+        <p>Current Status: 
+            <% if(food.status) { %> 
+                <%= statusLabels[food.status] %>
+            <% } %>
+        </p>
     </body>
 </html>

@@ -12,7 +12,6 @@ const foodSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: ['inStock', 'runningLow', 'outStock', 'expired'],
-    required: true,
     },
 });
 
@@ -26,7 +25,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // A user pantry stores many foods
+  // A user pantry stores many food items
   pantry: [foodSchema],  // Embed foodSchema here
 });
 
