@@ -5,7 +5,15 @@ const foodSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-  }
+  },
+  notes: {
+    type: String,
+  },
+  status: {
+    type: String,
+    enum: ['inStock', 'runningLow', 'outStock', 'expired'],
+    required: true,
+    },
 });
 
 // Define the user schema

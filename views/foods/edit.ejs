@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edit<%= food.name %></title>
+    </head>
+    <body>
+        <%- include('../partials/_navbar.ejs') %>
+        <h1>Edit <%= food.name %></h1>
+        <form
+            action="/users/<%= user._id %>/foods/<%= food._id %>?_method=PUT"
+            method="POST"
+        >
+            <label for="name">Name:</label>
+            <input
+                type="text"
+                name="name"
+                id="name"
+                value="<%= food.name %>"
+            >
+                
+            <label for="notes">Notes:</label>
+            <textarea name="notes" id="notes"><%= food.notes %></textarea>
+
+
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+            <option
+                value="inStock"
+                <%= food.status === "inStock" ? "selected" : "" %>
+            >
+                In Stock
+            </option>
+            <option
+                value="runningLow"
+                <%= food.status === "runningLow" ? "selected" : "" %>
+            >
+                Running Low
+            </option>
+            <option
+                value="outStock"
+                <%= food.status === "outStock" ? "selected" : "" %>
+            >
+                Out of Stock
+            </option>
+            <option
+                value="expired"
+                <%= food.status === "expired" ? "selected" : "" %>
+            >
+                Expired
+            </option>
+            </select>
+            <button type="submit">Update Item</button>
+        </form>
+    </body>
+</html>

@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Add a New Item</title>
+    </head>
+    <body>
+        <%- include('../partials/_navbar.ejs') %>
+        <h1>Add a New Item</h1>
+        <form action="/users/<%= user._id %>/foods" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" />
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add a New App</title>
-</head>
+            <label for="notes">Notes:</label>
+            <textarea name="notes" id="notes"></textarea>
 
-<body>
-    <%- include('../partials/_navbar.ejs') %>
-        <h1>Add a New Food</h1>
-</body>
-
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+                <option value="inStock">In Stock</option>
+                <option value="runningLow">Running Low</option>
+                <option value="outStock">Out of Stock</option>
+                <option value="expired">Expired</option>
+            </select>
+            <button type="submit">Add Item</button>
+        </form>
+    </body>
 </html>
